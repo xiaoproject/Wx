@@ -35,9 +35,9 @@ class WxApi extends Wechat
             // assoc: true 返回数组 默认返回对象
             $arr = json_decode($jsonStr, true);
 
-            $formatted_address = $arr['result']['formatted_address'];
+            $formatted_address = $arr['status'];
 
-            $this->reText($formatted_address);
+            $this->reText('status:'.$formatted_address);
             die();
         }
     }
