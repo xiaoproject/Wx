@@ -23,6 +23,17 @@ class WxApi extends Wechat
 //            die();
 //        }
 
+
+        // 图灵机器人
+        if (!empty($this->keyword)) {
+            $url = ThirdApi::getApiFromTL($this->keyword, ThirdApi::METHOD_GET);
+
+            $str = $this->CurlRequest($url);
+            $json = json_decode($str);
+            $this->reText($json->text);
+            die();
+        }
+
         // 定位
         if ($this->sendType = 'location') {
             $lat = $this->lat; // 纬度
@@ -45,14 +56,6 @@ class WxApi extends Wechat
         }
 
 
-        // 图灵机器人
-        if (!empty($this->keyword)) {
-            $url = ThirdApi::getApiFromTL($this->keyword, ThirdApi::METHOD_GET);
-
-            $str = $this->CurlRequest($url);
-            $json = json_decode($str);
-            $this->reText($json->text);
-        }
     }
 
 }
