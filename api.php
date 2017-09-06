@@ -28,6 +28,8 @@ class WxApi extends Wechat
 
             // 获取地址
             $lbs_url = ThirdApi::getApiFromLBS($lat, $lng);
+            $this->reText('$lbs_url:'.$lbs_url);
+            die();
 
             // 使用curl的get方式获取json数据
             $jsonStr = $this->CurlRequest($lbs_url);
