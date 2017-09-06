@@ -19,7 +19,36 @@ class WeChat
 	protected $lng;
 	protected $time;
 	public function CurlRequest($url,$data=null){
+	    // 1. 生成浏览器
+        $ch = curl_init();
+
+        // 2. 设置浏览器
+        // 为能够成功调用微信api所设，而且必须放在第1个设置项 ，安全上传
+        curl_setopt($ch, CURLOPT_SAFE_UPLOAD, true);
+        // 访问地址
+        curl_setopt($ch, CURLOPT_URL , $url );
+        // 希望请求成功后 XX以html文档流(html字符串的形式)返回
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // 告诉微信当前curl禁用ssl当中的公用名,公用名只有两种值0表没有，1表示拥有，默认为1
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        //告诉微信因为没有ssl所有不要进行认证的校验
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        //如果data不为null那么就使用post请求
+        if( !empty($data) ){ // post请求
+            @curl_setopt($ch, CURLOPT_POST, true);
+            @curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        }
+
+        // 3. 执行
+        $str = curl_exec($ch);
+        // 4. 关闭浏览器
+        curl_close($ch);
+
+        //把请求的数据进行返回
+        return $str;
 	}
+
 	public function GetAccessToken(){
 	}
 	//自动回复(此方法必须覆盖)
@@ -57,6 +86,7 @@ class WeChat
 		$resultStr = sprintf(WeChatApi::getMsgTpl('music'), $this->fromUsername, $this->toUsername, $this->time, 'music', $title, $desc, $url, $hqurl);
         echo $resultStr;
 	}
+
 	protected function reNews($items){
 		$count = count( $items );
 		$item = $this -> createNewsItems($items);

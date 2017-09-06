@@ -23,9 +23,21 @@ class WxApi extends Wechat
         }
 
         if ($this->sendType = 'location') {
-            $lat = $this->lat; // 维度
+            $lat = $this->lat; // 纬度
             $lng = $this->lng; // 经度
-            $this->reText('lat:' . $lat . '  and lng:' . $lng);
+
+            // 获取地址
+            $lbs_url = ThirdApi::getApiFromLBS($lat, $lng);
+
+            // 使用curl的get方式获取json数据
+            $jsonStr = $this->CurlRequest($lbs_url);
+
+            // assoc: true 返回数组 默认返回对象
+            $arr = json_decode($jsonStr, true);
+
+            $formatted_address = $arr['result']['formatted_address'];
+
+            $this->reText($formatted_address);
             die();
         }
     }
