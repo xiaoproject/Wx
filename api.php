@@ -12,17 +12,18 @@ class WxApi extends Wechat
         parent::responseMsg();
 
         // return text
-        if ($this->keyword == '文本') {
-            $this->reText('this is return text');
-            die();
-        }
+//        if ($this->keyword == '文本') {
+//            $this->reText('this is return text');
+//            die();
+//        }
+//
+//        // return image
+//        if ($this->keyword == '图片') {
+//            $this->reImage('wwIghrIMBFi1MKlngdObk5_kXR9XyFNVSytscZkyth4FzwcSnxZ_QBNnVCh5ubm9');
+//            die();
+//        }
 
-        // return image
-        if ($this->keyword == '图片') {
-            $this->reImage('wwIghrIMBFi1MKlngdObk5_kXR9XyFNVSytscZkyth4FzwcSnxZ_QBNnVCh5ubm9');
-            die();
-        }
-
+        // 定位
         if ($this->sendType = 'location') {
             $lat = $this->lat; // 纬度
             $lng = $this->lng; // 经度
@@ -42,10 +43,21 @@ class WxApi extends Wechat
             die();
 
         }
+
+
+        // 图灵机器人
+        if (!empty($this->keyword)) {
+            $url = ThirdApi::getApiFromTL($this->keyword, ThirdApi::METHOD_GET);
+
+            $str = $this->CurlRequest($url);
+            $json = json_decode($str);
+            $this->reText($json->text);
+        }
     }
 
 }
 
 $WxApi = new WxApi();
+// 通过验证之后，需要把这个关闭
 // $WxApi->valid();
 $WxApi->responseMsg();
