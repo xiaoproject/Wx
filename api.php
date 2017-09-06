@@ -21,6 +21,13 @@ class WxApi extends Wechat
             $this->reImage('wwIghrIMBFi1MKlngdObk5_kXR9XyFNVSytscZkyth4FzwcSnxZ_QBNnVCh5ubm9');
             die();
         }
+
+        if ($this->sendType = 'location') {
+            $lat = $this->lat; // 维度
+            $lng = $this->lng; // 经度
+            $this->reText('lat:' . $lat . '  and lng:' . $lng);
+            die();
+        }
     }
 
 }
