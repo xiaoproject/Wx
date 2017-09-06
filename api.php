@@ -11,13 +11,13 @@ class WxApi extends Wechat
         parent::responseMsg();
 
         // return text
-        if ($this->keyword == 'text') {
+        if ($this->keyword == '文本') {
             $this->reText('this is return text');
             die();
         }
 
         // return image
-        if ($this->keyword == 'image') {
+        if ($this->keyword == '图片') {
             $this->reImage('wwIghrIMBFi1MKlngdObk5_kXR9XyFNVSytscZkyth4FzwcSnxZ_QBNnVCh5ubm9');
             die();
         }
