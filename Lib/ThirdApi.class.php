@@ -30,17 +30,16 @@ class ThirdApi
      */
     public static function getApiFromLBS($lat, $lng)
     {
-        return trim("http://api.map.baidu.com/geocoder/v2/?location={$lat},{$lng}&output=json&pois=1&ak=".self::BD_AK);
+        return trim("http://api.map.baidu.com/geocoder/v2/?location={$lat},{$lng}&output=json&pois=1&ak=" . self::BD_AK);
     }
 
 
-
-    public static function getApiFromTL($info, $method=self::METHOD_POST)
+    public static function getApiFromTL($info, $method = self::METHOD_POST)
     {
         if ($method == self::METHOD_GET) {
             return trim("http://www.tuling123.com/openapi/api?info={$info}&key=" . self::TL_AK);
-        }elseif ($method == self::METHOD_POST){
-
+        } elseif ($method == self::METHOD_POST) {
+            return trim("http://www.tuling123.com/openapi/api");
         }
     }
 }

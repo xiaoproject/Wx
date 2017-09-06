@@ -24,15 +24,31 @@ class WxApi extends Wechat
 //        }
 
 
-        // 图灵机器人
-        if (!empty($this->keyword)) {
-            $url = ThirdApi::getApiFromTL($this->keyword, ThirdApi::METHOD_GET);
+        // 图灵机器人 get方式
+//        if (!empty($this->keyword)) {
+//            $url = ThirdApi::getApiFromTL($this->keyword, ThirdApi::METHOD_GET);
+//
+//            $str = $this->CurlRequest($url);
+//            $json = json_decode($str);
+//            $this->reText($json->text);
+//            die();
+//        }
 
-            $str = $this->CurlRequest($url);
+        // POST
+        // uesrid:我们一般传递时候使用12345678
+        if (!empty($this->keyword)) {
+            $url = ThirdApi::getApiFromTL('', ThirdApi::METHOD_POST);
+            $data = array(
+                'info' => $this->keyword,
+                'key' => ThirdApi::TL_AK,
+                'userid' => '12345678'
+            );
+            $str = $this->CurlPostJson($url, $data);
             $json = json_decode($str);
             $this->reText($json->text);
             die();
         }
+
 
         // 定位
         if ($this->sendType = 'location') {
