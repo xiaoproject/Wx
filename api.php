@@ -9,15 +9,19 @@ class WxApi extends Wechat
     public function responseMsg()
     {
         parent::responseMsg();
-//		if( !empty( $this->keyword ) ){
-//			$this -> reText('欢迎使用微信公众平台开发API');
-//		}
 
-        if ($this->keyword == '文本') {
-            $this->reText('回复文本');
+        // return text
+        if ($this->keyword == 'text') {
+            $this->reText('this is return text');
             die();
         }
-	}
+
+        // return image
+        if ($this->keyword == 'image') {
+            $this->reImage('wwIghrIMBFi1MKlngdObk5_kXR9XyFNVSytscZkyth4FzwcSnxZ_QBNnVCh5ubm9');
+            die();
+        }
+    }
 
 }
 
