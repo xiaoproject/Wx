@@ -47,5 +47,5 @@ class WxApi extends Wechat
 }
 
 $WxApi = new WxApi();
-$WxApi->valid();
+// $WxApi->valid();
 $WxApi->responseMsg();
