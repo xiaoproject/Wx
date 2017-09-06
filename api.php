@@ -25,8 +25,8 @@ class WxApi extends Wechat
         if ($this->sendType = 'location') {
             $lat = $this->lat; // 纬度
             $lng = $this->lng; // 经度
-            $this->reText('$lng:'.$lng);
-            die();
+//            $this->reText('$lng:'.$lng);
+//            die();
 
             // 获取地址
             $lbs_url = ThirdApi::getApiFromLBS($lat, $lng);
