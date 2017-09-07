@@ -1,4 +1,5 @@
 <?php
+include_once dirname(__FILE__) . '/WeChatApi.class.php';
 
 class WeChat
 {
@@ -90,8 +91,19 @@ class WeChat
     }
 
 
+    /**
+     * 获取Access_token
+     */
     public function GetAccessToken()
     {
+        // 获取url
+        $url = WeChatApi::getApiUrl('api_access_token');
+        // 使用get方法对Api进行请求
+        $str = $this->CurlRequest($url);
+        // 转换为json对象
+        $json = json_decode($str);
+        // 返回access_token
+        return $json->access_token;
     }
 
     //自动回复(此方法必须覆盖)

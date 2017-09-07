@@ -1,8 +1,8 @@
 <?php
 class WeChatApi
 {
-	const appID = '';
-	const appsecret = '';
+	const appID = 'wx213f94ddb545635c';
+	const appsecret = '2205f8486f30feac1f687ce7554d1033';
 	//微信api接口链接
 	public static function getApiUrl($name){
 		$url = array(
@@ -86,7 +86,8 @@ class WeChatApi
 				 %s
 				</Articles>
 				</xml>"
-			);
+
+            );
 			return $tpl[$type];
 	}
 	//调试工具
