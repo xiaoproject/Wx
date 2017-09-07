@@ -19,7 +19,7 @@ class TestAccessToken extends WeChat
             "oGZlvww4QEf4mxY4C7WScZv2EzjM"
            ],
            "msgtype":"text"，
-            "text": { "content": "hello !! is me"}
+           "text": { "content": "群发一条消息"}
         }';
         return $this->sendMess($data);
 
