@@ -13,10 +13,9 @@ class TestAccessToken extends WeChat
     public function sendAll()
     {
         $url = WeChatApi::getApiUrl('api_send_mass');
-        $token = $this->GetAccessToken();
-        $data = array('access_token' => $token);
+        $url .= $this->GetAccessToken();
 
-        $json = $this->CurlPostJson($url, $data);
+        $json = $this->CurlPostJson($url);
         return $json;
 
     }
