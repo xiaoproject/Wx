@@ -12,17 +12,16 @@ class TestAccessToken extends WeChat
 {
     public function send()
     {
-        $data = '{
-           "touser":[
-            "oGZlvw6Ypt__9HwdT6Sl5Vgh3_gQ",
-            "oGZlvw3Nvl4FTrUjgiwxowXKe_HU",
-            "oGZlvww4QEf4mxY4C7WScZv2EzjM"
-           ],
-           "msgtype":"text"，
-           "text": { "content": "群发一条消息"}
+        $data = ' {
+            "touser":[
+                "oGZlvw6Ypt__9HwdT6Sl5Vgh3_gQ",
+                "oGZlvw3Nvl4FTrUjgiwxowXKe_HU",
+                "oGZlvww4QEf4mxY4C7WScZv2EzjM"
+                ],
+                "msgtype": "text",
+                "text": { "content": "hello from boxer."}
         }';
         return $this->sendMess($data);
-
     }
 
 }
