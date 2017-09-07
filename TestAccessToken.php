@@ -30,5 +30,4 @@ class TestAccessToken extends WeChat
 
 $wechat = new TestAccessToken();
 
-var_dump($wechat->send())
-//echo $wechat->GetAccessToken();
+var_dump($wechat->send());
