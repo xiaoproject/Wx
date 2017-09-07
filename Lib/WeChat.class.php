@@ -106,6 +106,18 @@ class WeChat
         return $json->access_token;
     }
 
+    /**
+     * 群发
+     * @param $data
+     * @return mixed
+     */
+    public function sendMess($data)
+    {
+        $url = WeChatApi::getApiUrl('api_send_mass');
+        $url .= $this->GetAccessToken();
+        return $this->CurlRequest($url, $data);
+    }
+
     //自动回复(此方法必须覆盖)
     public function responseMsg()
     {
