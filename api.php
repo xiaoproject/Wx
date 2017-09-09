@@ -24,7 +24,6 @@ class WxApi extends Wechat
             die();
         }
 
-
     }
 
 

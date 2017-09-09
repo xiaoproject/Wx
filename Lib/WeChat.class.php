@@ -96,16 +96,28 @@ class WeChat
      */
     public function GetAccessToken()
     {
-        // 获取url
-        $url = WeChatApi::getApiUrl('api_access_token');
-        // 使用get方法对Api进行请求
-        $str = $this->CurlRequest($url);
-        // 转换为json对象
-        $json = json_decode($str);
+        $memcache = new Memcached();
+        $memcache->addServer('localhost', 11211);
+
+        $accessToken = $memcache->get('access_token');
+        if (empty($accessToken)) {
+            // 获取url
+            $url = WeChatApi::getApiUrl('api_access_token');
+
+            // 使用get方法对Api进行请求
+            $str = $this->CurlRequest($url);
+
+            // 转换为json对象
+            $json = json_decode($str);
+            $memcache->set('access_token', $json->access_token, 3600);
+
+            // 返回access_token
+            return $json->access_token;
+        }
         // 返回access_token
-        return $json->access_token;
+        return $accessToken;
     }
-    
+
 
     //自动回复(此方法必须覆盖)
     public function responseMsg()
@@ -298,7 +310,6 @@ class WeChat
             exit;
         }
     }
-
 
 
     /**
