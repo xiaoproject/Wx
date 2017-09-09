@@ -14,13 +14,17 @@ class WxApi extends Wechat
 
         if ($this->keyword == '你好' || $this->keyword == '您好') {
             $this->CustomerReText('亲， 有什么可以帮助您吗？');
-            $this->reText();
             die();
         }
 
         if ($this->keyword == '美女') {
             $data = $this->getNews('girl');
             $this->CustomerReImgText($data);
+            die();
+        }
+
+        if ($this->EventKey == 'contact') {
+            $this->reText('hello contact');
             die();
         }
 
