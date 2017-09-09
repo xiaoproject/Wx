@@ -4,6 +4,7 @@ include dirname(__FILE__) . "/media.php";
 include dirname(__FILE__) . "/Lib/WeChatApi.class.php";
 include dirname(__FILE__) . "/Lib/WeChat.class.php";
 include dirname(__FILE__) . "/Lib/ThirdApi.class.php";
+include dirname(__FILE__) . "/DB.class.php";
 
 class WxApi extends Wechat
 {
@@ -11,64 +12,16 @@ class WxApi extends Wechat
     {
         parent::responseMsg();
 
-        // return text
-//        if ($this->keyword == '文本') {
-//            $this->reText('this is return text');
-//            die();
-//        }
-//
-//        // return image
-//        if ($this->keyword == '图片') {
-//            $this->reImage('wwIghrIMBFi1MKlngdObk5_kXR9XyFNVSytscZkyth4FzwcSnxZ_QBNnVCh5ubm9');
-//            die();
-//        }
-
-
-        // 图灵机器人 get方式
-//        if (!empty($this->keyword)) {
-//            $url = ThirdApi::getApiFromTL($this->keyword, ThirdApi::METHOD_GET);
-//
-//            $str = $this->CurlRequest($url);
-//            $json = json_decode($str);
-//            $this->reText($json->text);
-//            die();
-//        }
-
-        // POST
-        // uesrid:我们一般传递时候使用12345678
-        if (!empty($this->keyword)) {
-            $url = ThirdApi::getApiFromTL('', ThirdApi::METHOD_POST);
-            $data = array(
-                'info' => $this->keyword,
-                'key' => ThirdApi::TL_AK,
-                'userid' => '12345678'
-            );
-            $str = $this->CurlPostJson($url, $data);
-            $json = json_decode($str);
-            $this->reText($json->text);
+        if ($this->keyword == '你好' || $this->keyword == '您好') {
+            $this->CustomerReText('亲， 有什么可以帮助您吗？');
+            $this->reText();
             die();
         }
 
-
-        // 定位
-        if ($this->sendType = 'location') {
-            $lat = $this->lat; // 纬度
-            $lng = $this->lng; // 经度
-
-            // 获取地址
-            $lbs_url = ThirdApi::getApiFromLBS($lat, $lng);
-
-            // 使用curl的get方式获取json数据
-            $jsonStr = $this->CurlRequest($lbs_url);
-
-            // assoc: true 返回数组 默认返回对象
-            $arr = json_decode($jsonStr, true);
-
-            $formatted_address = $arr['result']['formatted_address'];
-
-            $this->reText('status:' . $formatted_address);
+        if ($this->keyword == '美女') {
+            $data = $this->getNews('girl');
+            $this->CustomerReImgText($data);
             die();
-
         }
 
 

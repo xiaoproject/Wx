@@ -105,18 +105,7 @@ class WeChat
         // 返回access_token
         return $json->access_token;
     }
-
-    /**
-     * 群发
-     * @param $data
-     * @return mixed
-     */
-    public function sendMess($data)
-    {
-        $url = WeChatApi::getApiUrl('api_send_mass');
-        $url .= $this->GetAccessToken();
-        return $this->CurlRequest($url, $data);
-    }
+    
 
     //自动回复(此方法必须覆盖)
     public function responseMsg()
@@ -201,6 +190,7 @@ class WeChat
         }
     }
 
+    // 客服客服回复接口
     protected function CustomerReText($Text)
     {
         $access_token = $this->GetAccessToken();
@@ -220,6 +210,7 @@ class WeChat
         $this->CurlRequest($url, $data);
         exit();
     }
+
 
     protected function CustomerReImgText($ImgText)
     {
@@ -306,5 +297,34 @@ class WeChat
             echo $echoStr;
             exit;
         }
+    }
+
+
+
+    /**
+     * 群发
+     * @param $data
+     * @return mixed
+     */
+    public function sendMess($data)
+    {
+        $url = WeChatApi::getApiUrl('api_send_mass');
+        $url .= $this->GetAccessToken();
+        return $this->CurlRequest($url, $data);
+    }
+
+    /**
+     * 获取新闻
+     * @param $type
+     * @return array
+     */
+    public function getNews($type)
+    {
+        $db = DB::getInstance();
+        $stmt = $db->prepare("SELECT * FROM wx_news WHERE type=:type");
+        $stmt->execute(array(':type' => $type));
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+        
     }
 }
