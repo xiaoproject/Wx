@@ -10,8 +10,8 @@
       },
      {	
           "type":"view",
-          "name":"联系我们",
-          "url":"https://www.baidu.com"
+          "name":"微商城",
+          "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx213f94ddb545635c&redirect_uri=http%3A%2F%2Fwx.dpxiao.com%2Fuserinfo%2Fmine.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
       },
 
       {
