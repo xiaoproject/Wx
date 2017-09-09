@@ -9,9 +9,9 @@
           "key":"itcast"
       },
      {	
-          "type":"click",
+          "type":"view",
           "name":"联系我们",
-          "key":"contact"
+          "url":"https://www.baidu.com"
       },
 
       {
