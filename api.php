@@ -27,6 +27,31 @@ class WxApi extends Wechat
 
     }
 
+
+    /**
+     * 获取新闻
+     * @param $type
+     * @return array
+     */
+    public function getNews($type)
+    {
+        $memcache = new Memcached();
+        $memcache->addServer('localhost', 11211);
+
+        $data = $memcache->get($type);
+
+        if (empty($data)) {
+            $db = DB::getInstance();
+            $stmt = $db->prepare("SELECT * FROM wx_news WHERE type=:type");
+            $stmt->execute(array(':type' => $type));
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $memcache->set($type, $data, 300);
+        }
+
+        return $data;
+
+    }
+
 }
 
 $WxApi = new WxApi();
