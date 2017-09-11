@@ -13,7 +13,8 @@ class WxApi extends Wechat
         parent::responseMsg();
 
         if ($this->sendType == 'event' && $this->Event == 'subscribe') {
-            $this->reSubscribe('hello world');
+            $openId = $this->fromUsername;
+            $this->reSubscribe('hello world' . $openId);
             die();
         }
 
@@ -60,7 +61,6 @@ class WxApi extends Wechat
         return $data;
 
     }
-
 
 
 }

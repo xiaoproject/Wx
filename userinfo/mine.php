@@ -21,10 +21,12 @@ $code = $_GET['code'];
 
 if (empty($code)) die();
 
+// 获取用户Token
 $data = $weChat->codeTransAccessInfo($code);
 $web_access_token = $data['access_token'];
 $openId = $data['openid']; //微信客户端的openid
 
+// 获取用户消息
 $userInfo = $weChat->getUserInfo($web_access_token, $openId);
 
 var_dump($userInfo);
