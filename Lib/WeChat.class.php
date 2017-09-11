@@ -254,6 +254,7 @@ class WeChat
         exit();
     }
 
+    // 使用code 获取网页授权access_token和客户端的openId
     public function codeTransAccessInfo($code = null)
     {
         if (isset($code)) {
