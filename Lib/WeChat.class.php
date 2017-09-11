@@ -180,6 +180,7 @@ class WeChat
         return $item;
     }
 
+    // 订阅回复接口（关注）
     protected function reSubscribe($contentStr)
     {
         $this->reText($contentStr);
@@ -285,6 +286,7 @@ class WeChat
         return $validInfo;
     }
 
+    // 获取用户信息
     public function getUserInfo($web_access_token, $openId)
     {
         $url = WeChatApi::getApiUrl('api_get_userinfo');

@@ -12,6 +12,12 @@ class WxApi extends Wechat
     {
         parent::responseMsg();
 
+        if ($this->sendType == 'event' && $this->Event == 'subscribe') {
+            $this->reSubscribe('hello world');
+            die();
+        }
+
+
         if ($this->keyword == '你好' || $this->keyword == '您好') {
             $this->CustomerReText('亲， 有什么可以帮助您吗？');
             die();
@@ -54,6 +60,8 @@ class WxApi extends Wechat
         return $data;
 
     }
+
+
 
 }
 

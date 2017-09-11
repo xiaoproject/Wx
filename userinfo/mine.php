@@ -22,13 +22,12 @@ $code = $_GET['code'];
 if (empty($code)) die();
 
 $data = $weChat->codeTransAccessInfo($code);
-var_dump($data);
 $web_access_token = $data['access_token'];
 $openId = $data['openid']; //微信客户端的openid
 
-echo $web_access_token.'<hr>';
-echo $openId.'<hr>';
+$userInfo = $weChat->getUserInfo($web_access_token, $openId);
 
+var_dump($userInfo);
 
 ?>
 hello world
